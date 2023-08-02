@@ -42,6 +42,15 @@ def insert(user_data:UserSchema): #Con esta funcion usamos el UserSchema para qu
 
 
 
+@app.put("/api/update/{id}")
+def update(user_data:UserSchema, id:str):
+    data = user_data.dict()
+    data["id"] = id
+    conn.update(data)
+
+
+
+
 @app.delete("/api/delete/{id}")
 def delete(id:str):
     conn.delete(id)

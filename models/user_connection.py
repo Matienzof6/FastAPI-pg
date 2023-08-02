@@ -34,6 +34,14 @@ class UserConnection():
             return data.fetchall()
 
 
+
+    def update(self, data):
+        with self.conn.cursor() as cur:
+            cur.execute("""
+                UPDATE "user" SET name = %(name)s, phone = %(phone)s WHERE id = %(id)s
+            """, data) #No hace falta pasar como tupla la data ya que se esta pasando directamente como un diccionario mediante el parametro
+        self.conn.commit()
+
     def delete(self, id):
         with self.conn.cursor() as cur:
             cur.execute("""
