@@ -34,7 +34,12 @@ class UserConnection():
             return data.fetchall()
 
 
-
+    def delete(self, id):
+        with self.conn.cursor() as cur:
+            cur.execute("""
+                DELETE FROM "user" WHERE id = %s
+            """, (id,))
+            self.conn.commit()
 
     def __def__(self):  #Luego de ejecutar cualquier cosa dentro de la clase queremos cerrar la conexion a la base de datos
         self.conn.close()
