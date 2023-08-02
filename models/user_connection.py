@@ -19,6 +19,20 @@ class UserConnection():
         self.conn.commit()
 
 
+    def read_one(self, id):
+        with self.conn.cursor() as cur:
+            data = cur.execute("""
+                SELECT * FROM "user" WHERE id = %s
+            """, (id,)) #Le pasamos por parametro el id que queremos y mediante la tupla se estaran extrapolando los datos que van en %s, si hubiera mas datos, le pasariamos mas variables dentro de la tupla
+            return data.fetchone()
+
+    def read_all(self):
+        with self.conn.cursor() as cur:
+            data = cur.execute("""
+                SELECT * FROM "user"
+            """)
+            return data.fetchall()
+
 
 
 
